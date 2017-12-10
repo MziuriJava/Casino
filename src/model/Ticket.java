@@ -49,13 +49,7 @@ public class Ticket {
         this.kush = kush;
     }
 
-    public double getWin() {
-        return win;
-    }
-
-    public void setWin(double win) {
-        this.win = win;
-    }
+    public double getWin() {return kush*bet; }
 
     public List<TicketGame> getGames() {
         return games;

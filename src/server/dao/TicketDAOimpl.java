@@ -24,8 +24,7 @@ public class TicketDAOimpl implements TicketDAO {
             pstmt1.setDouble(2,ticket.getBet());
             pstmt1.setDouble(3,ticket.getKush());
             pstmt1.setDouble(4,ticket.getWin());
-            pstmt1.executeUpdate();
-            ResultSet rs=pstmt1.executeQuery();
+            ResultSet rs = pstmt1.executeQuery();
             rs.next();
             ticket.setID(rs.getInt(1));
             List<TicketGame> ticketgame= ticket.getGames();
@@ -43,6 +42,7 @@ public class TicketDAOimpl implements TicketDAO {
             con.close();
         } catch(Exception ex){
             System.out.println("createticket is not possible");
+            ex.printStackTrace();
         }
 
 
