@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class Game implements Serializable {
+
     private int ID;
 
     private String FirstTeam;
@@ -14,6 +15,18 @@ public class Game implements Serializable {
     private double coef2;
 
     private double coefx;
+
+    private int result; //1-pirvelma 2 meorem 3 fre;
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
+
 
     public int getID() {
         return ID;
@@ -63,15 +76,5 @@ public class Game implements Serializable {
         this.coefx = coefx;
     }
 
-    @Override
-    public String toString() {
-        return "Game{" +
-                "ID=" + ID +
-                ", FirstTeam='" + FirstTeam + '\'' +
-                ", SecondTeam='" + SecondTeam + '\'' +
-                ", coef1=" + coef1 +
-                ", coef2=" + coef2 +
-                ", coefx=" + coefx +
-                '}';
-    }
+
 }
