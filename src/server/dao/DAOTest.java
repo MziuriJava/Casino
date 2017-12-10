@@ -4,6 +4,7 @@ import model.Game;
 
 public class DAOTest {
     private static final GamesDAO gameDAO = new GamesDAOimpl();
+    private static final TicketDAO ticketDAO = new TicketDAOimpl();
     public static void main(String[] args) {
         testaddGame();
         }

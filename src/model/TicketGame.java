@@ -4,10 +4,6 @@ public class TicketGame {
 
     private int ID;
 
-    private String FirstTeam;
-
-    private String SecondTeam;
-
     private int vizedado;
 
     private double currentkush;
@@ -18,22 +14,6 @@ public class TicketGame {
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public String getFirstTeam() {
-        return FirstTeam;
-    }
-
-    public void setFirstTeam(String firstTeam) {
-        FirstTeam = firstTeam;
-    }
-
-    public String getSecondTeam() {
-        return SecondTeam;
-    }
-
-    public void setSecondTeam(String secondTeam) {
-        SecondTeam = secondTeam;
     }
 
     public int getVizedado() {

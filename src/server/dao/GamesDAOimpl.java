@@ -17,14 +17,14 @@ public class GamesDAOimpl implements GamesDAO{
         PreparedStatement pstmt =null;
         try {
             con = DatabaseConnector.getConnection();
-            pstmt =con.prepareStatement("INSERT INTO GAMES (ID,TEAM1,TEAM2,COEFFICIENT1,COEFFICIENT2,COEFFICIENTX) VALUES (?,?,?,?,?,?)");
-            pstmt.setInt(1,game.getID());
-            pstmt.setString(2,game.getFirstTeam());
-            pstmt.setString(3,game.getSecondTeam());
-            pstmt.setDouble(4,game.getCoef1());
-            pstmt.setDouble(5,game.getCoef2());
-            pstmt.setDouble(6,game.getCoefx());
+            pstmt =con.prepareStatement("INSERT INTO GAMES (TEAM1,TEAM2,COEFFICIENT1,COEFFICIENT2,COEFFICIENTX) VALUES (?,?,?,?,?)");
+            pstmt.setString(1,game.getFirstTeam());
+            pstmt.setString(2,game.getSecondTeam());
+            pstmt.setDouble(3,game.getCoef1());
+            pstmt.setDouble(4,game.getCoef2());
+            pstmt.setDouble(5,game.getCoefx());
             pstmt.executeUpdate();
+
         } catch(Exception ex) {
             System.out.println("can't add game");
             ex.printStackTrace();
