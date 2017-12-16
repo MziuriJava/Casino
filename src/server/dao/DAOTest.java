@@ -19,7 +19,7 @@ public class DAOTest {
 //        testupdategame();
 //        testgetgames();
 //        testdeletegame();
-//        testsetresult();
+        testsetresult();
 
     }
 
@@ -93,7 +93,7 @@ public class DAOTest {
     }
 
     private static void testdeletegame(){
-        int ID=1;
+        int ID=2;
         try {
             gameDAO.deleteGame(ID);
         }catch (Exception ex){
@@ -104,7 +104,7 @@ public class DAOTest {
     }
 
     private static void testsetresult(){
-        int ID=1;
+        int ID=3;
         int result=2;
 
         try {
@@ -117,3 +117,4 @@ public class DAOTest {
 
 
 }
+

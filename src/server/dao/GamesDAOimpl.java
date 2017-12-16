@@ -85,7 +85,6 @@ public class GamesDAOimpl implements GamesDAO{
                 Double Coef2=rs.getDouble("COEFFICIENT2");
                 Double Coef3=rs.getDouble("COEFFICIENTX");
 
-                int rank = rs.getInt("rank");
                 Game game = new Game();
                 game.setID(id);
                 game.setFirstTeam(FirstTeam);
