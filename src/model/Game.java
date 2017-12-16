@@ -76,5 +76,16 @@ public class Game implements Serializable {
         this.coefx = coefx;
     }
 
-
+    @Override
+    public String toString() {
+        return "Game{" +
+                "ID=" + ID +
+                ", FirstTeam='" + FirstTeam + '\'' +
+                ", SecondTeam='" + SecondTeam + '\'' +
+                ", coef1=" + coef1 +
+                ", coef2=" + coef2 +
+                ", coefx=" + coefx +
+                ", result=" + result +
+                '}';
+    }
 }

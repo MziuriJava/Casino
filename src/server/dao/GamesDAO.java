@@ -2,6 +2,8 @@ package server.dao;
 
 import model.Game;
 
+import java.util.List;
+
 public interface GamesDAO {
 
     void addGames(Game game) throws Exception;
@@ -10,7 +12,7 @@ public interface GamesDAO {
 
     void deleteGame(int ID) throws Exception;
 
-    void getGames () throws Exception;
+    List<Game> getGames () throws Exception;
 
     void checkResult (int ID);
 

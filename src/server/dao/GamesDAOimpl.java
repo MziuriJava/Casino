@@ -1,12 +1,13 @@
 package server.dao;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import model.Game;
 import server.util.DatabaseConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GamesDAOimpl implements GamesDAO{
 
@@ -30,6 +31,7 @@ public class GamesDAOimpl implements GamesDAO{
             ex.printStackTrace();
         } finally {
             try{
+
             pstmt.close();
             con.close();
         } catch (Exception ignored) {}
@@ -37,16 +39,69 @@ public class GamesDAOimpl implements GamesDAO{
 
     @Override
     public void updateGame(int ID, double coef1, double coef2, double coef3) throws Exception {
+        Connection con =null;
+        PreparedStatement pstmt =null;
+        try {
+            con = DatabaseConnector.getConnection();
+            pstmt =con.prepareStatement("UPDATE GAMES SET COEFFICIENT1=?,COEFFICIENT2=?,COEFFICIENTX=?  WHERE ID=?");
+            pstmt.setDouble(1,coef1);
+            pstmt.setDouble(2,coef2);
+            pstmt.setDouble(3,coef3);
+            pstmt.setInt(4,ID);
+            pstmt.executeUpdate();
 
+        }catch (Exception ex){
+            System.out.println("cant update game");
+        }
     }
 
     @Override
     public void deleteGame(int ID) throws Exception {
+        try {
+            Connection con = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("DELETE FROM GAMES WHERE ID=?");
+            pstmt.setInt(1, ID);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception ex) {
+            throw new Exception("Couldn't delete game " + ex);
+        }
 
     }
 
     @Override
-    public void getGames() throws Exception {
+    public List<Game> getGames() throws Exception {
+        try {
+            Connection con = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM GAMES" );
+            ResultSet rs = pstmt.executeQuery();
+            List<Game> games = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String FirstTeam = rs.getString("TEAM1");
+                String SecondTeam = rs.getString("TEAM2");
+                Double Coef1=rs.getDouble("COEFFICIENT1");
+                Double Coef2=rs.getDouble("COEFFICIENT2");
+                Double Coef3=rs.getDouble("COEFFICIENTX");
+
+                int rank = rs.getInt("rank");
+                Game game = new Game();
+                game.setID(id);
+                game.setFirstTeam(FirstTeam);
+                game.setSecondTeam(SecondTeam);
+                game.setCoef1(Coef1);
+                game.setCoef2(Coef2);
+                game.setCoefx(Coef3);
+                games.add(game);
+                ////bolos 3 sveti
+            }
+            pstmt.close();
+            con.close();
+            return games;
+        } catch (Exception ex) {
+            throw new Exception("Can't get games " + ex);
+        }
 
     }
 
@@ -57,6 +112,22 @@ public class GamesDAOimpl implements GamesDAO{
 
     @Override
     public void setResult(int ID, int result) {
+        try {
+            Connection con = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("UPDATE GAMES SET RESULT=? WHERE ID=?");
+            pstmt.setInt(1,result );
+            pstmt.setInt(2,ID);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception ex) {
+            try {
+                throw new Exception("Couldn't update team rank " + ex);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 }
+
