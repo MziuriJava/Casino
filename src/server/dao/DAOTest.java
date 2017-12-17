@@ -14,22 +14,23 @@ public class DAOTest {
 
     public static void main(String[] args) {
 
-//        testaddGame();
-//        testcreateticket();
+   //     testaddGame();
+   //     testcreateticket();
 //        testupdategame();
 //        testgetgames();
 //        testdeletegame();
-        testsetresult();
+//        testsetresult();
+ //       checkresult();
 
     }
 
     private static void testaddGame() {
         Game game = new Game();
-        game.setFirstTeam("aas");
-        game.setSecondTeam("asxs");
-        game.setCoef1(1.2);
-        game.setCoef2(3.2);
-        game.setCoefx(2.0);
+        game.setFirstTeam("Manchester");
+        game.setSecondTeam("Chelsea");
+        game.setCoef1(1.5);
+        game.setCoef2(2.7);
+        game.setCoefx(5.0);
         try {
             gameDAO.addGames(game);
         } catch (Exception ex) {
@@ -44,21 +45,21 @@ public class DAOTest {
         ticket.setBet(100);
         List <TicketGame> ticketGames = new ArrayList<>();
         TicketGame tg1 = new TicketGame();
-        tg1.setID(1);
+        tg1.setID(3);
         tg1.setVizedado(2);
-        tg1.setCurrentkush(2.0);
+        tg1.setCurrentkush(3.2);
         ticketGames.add(tg1);
         TicketGame tg2 = new TicketGame();
-        tg2.setID(2);
+        tg2.setID(4);
         tg2.setVizedado(2);
-        tg2.setCurrentkush(2.0);
+        tg2.setCurrentkush(2.7);
         ticketGames.add(tg2);
         TicketGame tg3 = new TicketGame();
-        tg3.setID(3);
+        tg3.setID(5);
         tg3.setVizedado(2);
-        tg3.setCurrentkush(2.0);
-        ticketGames.add(tg3);
-        ticket.setKush(ticketGames.get(1).getCurrentkush()*ticketGames.get(2).getCurrentkush()*ticketGames.get(0).getCurrentkush());
+        tg3.setCurrentkush(1.0);
+        //ticketGames.add(tg3);
+        ticket.setKush(ticketGames.get(1).getCurrentkush()*ticketGames.get(0).getCurrentkush());
         ticket.setGames(ticketGames);
         try {
             ticketDAO.createTicket(ticket);
@@ -84,7 +85,10 @@ public class DAOTest {
 
     private static void testgetgames(){
         try {
-            System.out.println(gameDAO.getGames());
+            List <Game> games=gameDAO.getGames();
+            for (int i=0;i<games.size();i++){
+                System.out.println(games.get(i).toString());
+            }
         }catch (Exception ex){
             System.out.println("cant get games");
             System.out.println(ex.getMessage());
@@ -114,7 +118,18 @@ public class DAOTest {
         }
 
     }
+    private static void checkresult(){
+        try {
+            int ID = 3;
+            Game game = gameDAO.checkResult(ID);
 
+            System.out.println((int)game.getResult());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            System.out.println("testdao cant check result");
+        }
+
+    }
 
 }
 

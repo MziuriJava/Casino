@@ -13,9 +13,18 @@ public class Ticket {
 
     private double win; //mogeba
 
+    private int result;
+
     private List<TicketGame> games; //tamashebi romlebic shedis
 
 
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
 
     public int getID() {
         return ID;

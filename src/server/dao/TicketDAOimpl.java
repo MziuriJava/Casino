@@ -1,5 +1,7 @@
 package server.dao;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ResultTreeType;
+import com.sun.xml.internal.bind.v2.TODO;
 import model.Ticket;
 import model.TicketGame;
 import server.util.DatabaseConnector;
@@ -50,6 +52,18 @@ public class TicketDAOimpl implements TicketDAO {
 
     @Override
     public void checkTicket(int ID) throws Exception {
+    Connection con = DatabaseConnector.getConnection();
+    PreparedStatement pstmt = con.prepareStatement("SELECT * FROM GAMETCK where ID=?");
+    pstmt.setInt(1,ID);
+    ResultSet rs1= pstmt.executeQuery();
+    PreparedStatement pstmt2 =null;
+        while(rs1.next()){
+            pstmt2=con.prepareStatement("SELECT * FROM GAME where ID=?");
+            pstmt2.setInt(1,rs1.getInt("RESULT"));
+            ResultSet rs2 = pstmt2.executeQuery();
+            rs2.next();
+            //TODO checkticket
 
+        }
     }
 }

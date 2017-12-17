@@ -105,8 +105,31 @@ public class GamesDAOimpl implements GamesDAO{
     }
 
     @Override
-    public void checkResult(int ID) {
+    public Game checkResult(int ID) throws Exception {
+    try {
+        Connection con = DatabaseConnector.getConnection();
+        PreparedStatement pstmt =con.prepareStatement("SELECT * FROM GAMES Where ID=?");
+        pstmt.setInt(1,ID);
 
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        int id = rs.getInt("ID");
+        String FirstTeam = rs.getString("TEAM1");
+        String SecondTeam = rs.getString("TEAM2");
+        double result=rs.getDouble("RESULT");
+        Game game = new Game();
+        game.setID(id);
+        game.setFirstTeam(FirstTeam);
+        game.setSecondTeam(SecondTeam);
+        game.setResult(result);
+        con.close();
+        pstmt.close();
+        return game;
+
+    }catch (Exception ex){
+        ex.printStackTrace();
+        throw new Exception("can't check result "+ ex);
+    }
     }
 
     @Override
@@ -121,7 +144,7 @@ public class GamesDAOimpl implements GamesDAO{
             con.close();
         } catch (Exception ex) {
             try {
-                throw new Exception("Couldn't update team rank " + ex);
+                throw new Exception("Can't set result" + ex);
             } catch (Exception e) {
                 e.printStackTrace();
             }
