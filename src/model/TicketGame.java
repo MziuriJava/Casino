@@ -2,11 +2,11 @@ package model;
 
 public class TicketGame {
 
-    private int ID;
+    private int ID; //tamashis
 
-    private int vizedado;
+    private int vizedado; //vizedado
 
-    private double currentkush;
+    private double currentkush; //misi kushi
 
     public int getID() {
         return ID;

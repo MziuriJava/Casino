@@ -14,7 +14,7 @@ public interface GamesDAO {
 
     List<Game> getGames () throws Exception;
 
-    Game checkResult (int ID) throws Exception;
+    Game checkGame (int ID) throws Exception;
 
     void setResult(int ID, int result);
 }

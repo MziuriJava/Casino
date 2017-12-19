@@ -51,19 +51,38 @@ public class TicketDAOimpl implements TicketDAO {
     }
 
     @Override
-    public void checkTicket(int ID) throws Exception {
-    Connection con = DatabaseConnector.getConnection();
-    PreparedStatement pstmt = con.prepareStatement("SELECT * FROM GAMETCK where ID=?");
-    pstmt.setInt(1,ID);
-    ResultSet rs1= pstmt.executeQuery();
-    PreparedStatement pstmt2 =null;
-        while(rs1.next()){
-            pstmt2=con.prepareStatement("SELECT * FROM GAME where ID=?");
-            pstmt2.setInt(1,rs1.getInt("RESULT"));
-            ResultSet rs2 = pstmt2.executeQuery();
-            rs2.next();
-            //TODO checkticket
+    public List<TicketGame> checkTicket(int ID) throws Exception {
+        try {
+            Connection con = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM GAMETCK WHERE TCKID=?");
+            pstmt.setInt(1, ID);
+            ResultSet rs = pstmt.executeQuery();
 
+            List<TicketGame> ticketgames = new ArrayList<>();
+
+            while (rs.next()) {
+
+
+                TicketGame ticketgame = new TicketGame();
+                ticketgame.setID(rs.getInt("GAMEID"));
+
+                ticketgame.setVizedado(rs.getInt("VIZEDADO"));
+
+                ticketgame.setCurrentkush(rs.getDouble("KUSH"));
+
+                ticketgames.add(ticketgame);
+
+            }
+
+            return ticketgames;
+
+        } catch (Exception ex) {
+            throw new Exception("Can't ckeckticket", ex);
         }
+    }
+
+    @Override
+    public void getTicket(int ID) throws Exception {
+
     }
 }

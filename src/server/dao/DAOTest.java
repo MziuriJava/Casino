@@ -14,20 +14,20 @@ public class DAOTest {
 
     public static void main(String[] args) {
 
-   //     testaddGame();
-   //     testcreateticket();
+    //    testaddGame();
+     //   testcreateticket();
 //        testupdategame();
 //        testgetgames();
 //        testdeletegame();
 //        testsetresult();
- //       checkresult();
+        checktickresult();
 
     }
 
     private static void testaddGame() {
         Game game = new Game();
-        game.setFirstTeam("Manchester");
-        game.setSecondTeam("Chelsea");
+        game.setFirstTeam("UNITED");
+        game.setSecondTeam("CITY");
         game.setCoef1(1.5);
         game.setCoef2(2.7);
         game.setCoefx(5.0);
@@ -45,21 +45,21 @@ public class DAOTest {
         ticket.setBet(100);
         List <TicketGame> ticketGames = new ArrayList<>();
         TicketGame tg1 = new TicketGame();
-        tg1.setID(3);
+        tg1.setID(1);
         tg1.setVizedado(2);
-        tg1.setCurrentkush(3.2);
+        tg1.setCurrentkush(2.7);
         ticketGames.add(tg1);
         TicketGame tg2 = new TicketGame();
-        tg2.setID(4);
+        tg2.setID(2);
         tg2.setVizedado(2);
         tg2.setCurrentkush(2.7);
         ticketGames.add(tg2);
         TicketGame tg3 = new TicketGame();
-        tg3.setID(5);
-        tg3.setVizedado(2);
-        tg3.setCurrentkush(1.0);
-        //ticketGames.add(tg3);
-        ticket.setKush(ticketGames.get(1).getCurrentkush()*ticketGames.get(0).getCurrentkush());
+        tg3.setID(3);
+        tg3.setVizedado(1);
+        tg3.setCurrentkush(1.5);
+        ticketGames.add(tg3);
+        ticket.setKush(ticketGames.get(1).getCurrentkush()*ticketGames.get(0).getCurrentkush()*ticketGames.get(2).getCurrentkush());
         ticket.setGames(ticketGames);
         try {
             ticketDAO.createTicket(ticket);
@@ -118,15 +118,28 @@ public class DAOTest {
         }
 
     }
-    private static void checkresult(){
+    private static void checktickresult(){
         try {
-            int ID = 3;
-            Game game = gameDAO.checkResult(ID);
+            List<TicketGame> ticketGames = new ArrayList<>();
+            ticketGames =ticketDAO.checkTicket(1);
+            double kush = 1;
+            int ans= 1;
+            for(int i=0;i<ticketGames.size();i++){
+                Game game =gameDAO.checkGame(ticketGames.get(i).getID());
+                System.out.println(game.getResult()+" "+ticketGames.get(i).getVizedado());
+                if(game.getResult()!=ticketGames.get(i).getVizedado()){
+                    ans=0;
+                    break;
+                }
 
-            System.out.println((int)game.getResult());
+            }
+            if(ans==0) {
+                System.out.println("ar dajda");
+            } else System.out.println("dajda******");
+
         }catch (Exception ex){
             ex.printStackTrace();
-            System.out.println("testdao cant check result");
+            System.out.println("testdao cant check ticket result");
         }
 
     }

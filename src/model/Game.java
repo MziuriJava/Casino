@@ -16,13 +16,13 @@ public class Game implements Serializable {
 
     private double coefx;
 
-    private double result; //1-pirvelma 2 meorem 3 fre;
+    private int result; //1-pirvelma 2 meorem 3 fre;
 
-    public double getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(double result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

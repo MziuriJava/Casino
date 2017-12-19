@@ -105,7 +105,7 @@ public class GamesDAOimpl implements GamesDAO{
     }
 
     @Override
-    public Game checkResult(int ID) throws Exception {
+    public Game checkGame(int ID) throws Exception {
     try {
         Connection con = DatabaseConnector.getConnection();
         PreparedStatement pstmt =con.prepareStatement("SELECT * FROM GAMES Where ID=?");
@@ -116,7 +116,7 @@ public class GamesDAOimpl implements GamesDAO{
         int id = rs.getInt("ID");
         String FirstTeam = rs.getString("TEAM1");
         String SecondTeam = rs.getString("TEAM2");
-        double result=rs.getDouble("RESULT");
+        int result=rs.getInt("RESULT");
         Game game = new Game();
         game.setID(id);
         game.setFirstTeam(FirstTeam);
