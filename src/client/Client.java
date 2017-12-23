@@ -40,37 +40,43 @@ public class Client {
                     }
 
                     case create_ticket:{
-                        out.writeObject(command);
-                        CommandResult commandResult =(CommandResult)in.readObject();
-                        System.out.println(commandResult.name());
-                        if(commandResult==CommandResult.FAILURE){
-                            break;
-                        }
-                        double kushi= 1;
+
+
                         Ticket ticket= new Ticket();
                         System.out.println("tamashebis raodenoba?");
                         ticket.setGamesnumber(scanner.nextInt());
-                        System.out.println("beti?");
-                        ticket.setBet(scanner.nextDouble());
+
                         List <TicketGame> ticketGames = new ArrayList<>();
                         for (int i=0;i<ticket.getGamesnumber();i++){
                             TicketGame ticketGame = new TicketGame();
-                            System.out.println("game id?");
+                            System.out.println("Tamashis ID?");
                             ticketGame.setID(scanner.nextInt());
-                            System.out.println("visze deb?");
+                            System.out.println("Vize deb? pirveli gundi-1 : fre-3 : meore gundi 2");
                             ticketGame.setVizedado(scanner.nextInt());
-                            System.out.println("kushi?");
-                            ticketGame.setCurrentkush(scanner.nextDouble());
                             ticketGames.add(ticketGame);
-                            kushi=kushi*ticketGame.getCurrentkush();
                         }
-                        ticket.setKush(kushi);
+                        System.out.println("Ramdens deb?");
+                        ticket.setBet(scanner.nextDouble());
                         ticket.setGames(ticketGames);
+
+                        out.writeObject(command);
                         out.writeObject(ticket);
+                        CommandResult commandResult =(CommandResult)in.readObject();
+                        System.out.println(commandResult.name());
 
                         break;
                     }
                     case check_result:{
+                        System.out.println("Ticket ID:");
+                        int ID=scanner.nextInt();
+                        out.writeObject(command);
+                        out.writeObject(ID);
+                        CommandResult commandResult =(CommandResult)in.readObject();
+                        System.out.println(commandResult);
+                        int ans=(int)in.readObject();
+                        if(ans==0) {
+                            System.out.println("Ar dajda :(((");
+                        } else System.out.println("Dajda :******");
                         break;
                     }
                     case Exit:
@@ -82,6 +88,7 @@ public class Client {
                 }
             }
         }catch (Exception ex ){
+            ex.printStackTrace();
             System.out.println("can't connect to server");
         }
     }

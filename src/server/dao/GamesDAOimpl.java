@@ -81,9 +81,9 @@ public class GamesDAOimpl implements GamesDAO{
                 int id = rs.getInt("ID");
                 String FirstTeam = rs.getString("TEAM1");
                 String SecondTeam = rs.getString("TEAM2");
-                Double Coef1=rs.getDouble("COEFFICIENT1");
-                Double Coef2=rs.getDouble("COEFFICIENT2");
-                Double Coef3=rs.getDouble("COEFFICIENTX");
+                double Coef1=rs.getDouble("COEFFICIENT1");
+                double Coef2=rs.getDouble("COEFFICIENT2");
+                double Coef3=rs.getDouble("COEFFICIENTX");
 
                 Game game = new Game();
                 game.setID(id);
@@ -116,9 +116,15 @@ public class GamesDAOimpl implements GamesDAO{
         int id = rs.getInt("ID");
         String FirstTeam = rs.getString("TEAM1");
         String SecondTeam = rs.getString("TEAM2");
+        double coef1=rs.getDouble("COEFFICIENT1");
+        double coef2=rs.getDouble("COEFFICIENT2");
+        double coef3=rs.getDouble("COEFFICIENTX");
         int result=rs.getInt("RESULT");
         Game game = new Game();
         game.setID(id);
+        game.setCoef1(coef1);
+        game.setCoef2(coef2);
+        game.setCoefx(coef3);
         game.setFirstTeam(FirstTeam);
         game.setSecondTeam(SecondTeam);
         game.setResult(result);

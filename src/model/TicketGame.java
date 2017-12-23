@@ -1,6 +1,8 @@
 package model;
 
-public class TicketGame {
+import java.io.Serializable;
+
+public class TicketGame implements Serializable{
 
     private int ID; //tamashis
 

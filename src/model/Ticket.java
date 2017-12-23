@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Ticket {
+public class Ticket implements Serializable {
     private int ID ;
 
     private int gamesnumber; //tamashebis raodenoba
