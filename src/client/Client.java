@@ -1,12 +1,11 @@
 package client;
 
-import model.Command;
-import model.CommandResult;
-import model.Game;
+import model.*;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,10 +38,39 @@ public class Client {
                         }
                         break;
                     }
-                    case check_result:{
+
+                    case create_ticket:{
+                        out.writeObject(command);
+                        CommandResult commandResult =(CommandResult)in.readObject();
+                        System.out.println(commandResult.name());
+                        if(commandResult==CommandResult.FAILURE){
+                            break;
+                        }
+                        double kushi= 1;
+                        Ticket ticket= new Ticket();
+                        System.out.println("tamashebis raodenoba?");
+                        ticket.setGamesnumber(scanner.nextInt());
+                        System.out.println("beti?");
+                        ticket.setBet(scanner.nextDouble());
+                        List <TicketGame> ticketGames = new ArrayList<>();
+                        for (int i=0;i<ticket.getGamesnumber();i++){
+                            TicketGame ticketGame = new TicketGame();
+                            System.out.println("game id?");
+                            ticketGame.setID(scanner.nextInt());
+                            System.out.println("visze deb?");
+                            ticketGame.setVizedado(scanner.nextInt());
+                            System.out.println("kushi?");
+                            ticketGame.setCurrentkush(scanner.nextDouble());
+                            ticketGames.add(ticketGame);
+                            kushi=kushi*ticketGame.getCurrentkush();
+                        }
+                        ticket.setKush(kushi);
+                        ticket.setGames(ticketGames);
+                        out.writeObject(ticket);
+
                         break;
                     }
-                    case create_ticket:{
+                    case check_result:{
                         break;
                     }
                     case Exit:

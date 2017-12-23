@@ -3,6 +3,7 @@ package server.socket;
 import model.Command;
 import model.CommandResult;
 import model.Game;
+import model.Ticket;
 import server.dao.GamesDAO;
 import server.dao.GamesDAOimpl;
 import server.dao.TicketDAO;
@@ -46,11 +47,26 @@ public class SocketThread implements Runnable {
                     }
                     break;
 
+
                 case create_ticket:
+                    try {
+                        out.writeObject(CommandResult.SUCCESSFUL);
+                        Ticket ticket=new Ticket();
+                        ticket=(Ticket)in.readObject();
+                        ticketDAO.createTicket(ticket);
+
+                    }catch (Exception ex){
+                        out.writeObject(CommandResult.FAILURE);
+                        ex.printStackTrace();
+                    }
+
                     break;
+
 
                 case check_result:
                     break;
+
+
                 case Exit:
                     in.close();
                     out.close();
