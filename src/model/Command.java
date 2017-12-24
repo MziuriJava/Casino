@@ -1,8 +1,9 @@
 package model;
 
 public enum Command {
-    get_games,
+    // TODO დიდი ასოებით
+    GET_GAMES,
     create_ticket,
     check_result,
-    Exit,
+    Exit
 }

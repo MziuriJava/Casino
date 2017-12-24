@@ -17,7 +17,7 @@ public class DAOTest {
     //    testaddGame();
      //   testcreateticket();
 //        testupdategame();
-//        testgetgames();
+//        testGetGames();
 //        testdeletegame();
 //        testsetresult();
         checktickresult();
@@ -69,10 +69,10 @@ public class DAOTest {
     }
 
     private static void testupdategame(){
-        int ID=1;
-        double coef1=2.3;
-        double coef2=3.3;
-        double coef3=4.3;
+        int ID = 1;
+        double coef1 = 2.3;
+        double coef2 = 3.3;
+        double coef3 = 4.3;
 
         try {
             gameDAO.updateGame(ID,coef1,coef2,coef3);
@@ -83,13 +83,13 @@ public class DAOTest {
 
     }
 
-    private static void testgetgames(){
+    private static void testGetGames(){
         try {
-            List <Game> games=gameDAO.getGames();
-            for (int i=0;i<games.size();i++){
-                System.out.println(games.get(i).toString());
+            List <Game> games = gameDAO.getGames();
+            for (Game game : games) {
+                System.out.println(game.toString());
             }
-        }catch (Exception ex){
+        } catch (Exception ex){
             System.out.println("cant get games");
             System.out.println(ex.getMessage());
         }

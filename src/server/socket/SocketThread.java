@@ -6,11 +6,9 @@ import server.dao.GamesDAOimpl;
 import server.dao.TicketDAO;
 import server.dao.TicketDAOimpl;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SocketThread implements Runnable {
@@ -35,7 +33,7 @@ public class SocketThread implements Runnable {
             while (true) {
                 Command command = (Command) in.readObject();
                 switch (command) {
-                    case get_games:
+                    case GET_GAMES:
                         try {
                             List<Game> games = gameDAO.getGames();
                             out.writeObject(CommandResult.SUCCESSFUL);
@@ -78,7 +76,6 @@ public class SocketThread implements Runnable {
                             int ans = 1;
                             for (int i = 0; i < ticketGames.size(); i++) {
                                 Game game = gameDAO.checkGame(ticketGames.get(i).getID());
-                                System.out.println(game.getResult() + " " + ticketGames.get(i).getVizedado());
                                 if (game.getResult() != ticketGames.get(i).getVizedado()) {
                                     ans = 0;
                                     break;
@@ -90,7 +87,6 @@ public class SocketThread implements Runnable {
                         } catch (Exception ex) {
                             out.writeObject(CommandResult.FAILURE);
                             ex.printStackTrace();
-
                         }
                         break;
                     case Exit:

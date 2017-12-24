@@ -25,7 +25,7 @@ public class Client {
                 int num = scanner.nextInt();
                 Command command = commands[num-1];
                 switch (command) {
-                    case get_games: {
+                    case GET_GAMES: {
                         out.writeObject(command);
                         CommandResult commandResult =(CommandResult)in.readObject();
                         System.out.println(commandResult.name());
