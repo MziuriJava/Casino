@@ -16,7 +16,7 @@ public class Client {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in= new ObjectInputStream(socket.getInputStream());
             Scanner scanner = new Scanner(System.in);
-            while (true){
+            while (true) {
                 System.out.println("Choose command");
                 Command commands[] =Command.values();
                 for(int i=0;i< commands.length;i++){
@@ -25,7 +25,7 @@ public class Client {
                 int num = scanner.nextInt();
                 Command command = commands[num-1];
                 switch (command) {
-                    case get_games:{
+                    case get_games: {
                         out.writeObject(command);
                         CommandResult commandResult =(CommandResult)in.readObject();
                         System.out.println(commandResult.name());
@@ -87,7 +87,7 @@ public class Client {
                         return ;
                 }
             }
-        }catch (Exception ex ){
+        } catch (Exception ex ){
             ex.printStackTrace();
             System.out.println("can't connect to server");
         }

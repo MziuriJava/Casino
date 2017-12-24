@@ -118,6 +118,8 @@ public class DAOTest {
         }
 
     }
+
+    @SuppressWarnings("Duplicates")
     private static void checktickresult(){
         try {
             List<TicketGame> ticketGames = new ArrayList<>();
